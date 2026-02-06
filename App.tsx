@@ -251,7 +251,7 @@ export default function App() {
             animate={{ y: 0, opacity: 1 }}
             className="mb-6 relative"
           >
-            <h1 className="text-7xl md:text-[14rem] font-serif italic leading-none select-none drop-shadow-2xl flex flex-col items-center">
+            <h1 className="text-7xl md:text-[10rem] font-serif italic leading-none select-none drop-shadow-2xl flex flex-col items-center">
               <span className="px-10 relative inline-block">
                 Kuint
               </span>
