@@ -31,10 +31,6 @@ import {
   Shield,
   Star,
   Dog,
-  Wind,
-  Trash2,
-  Lock,
-  Baby,
   Sparkles,
   Shirt,
   Flame,
@@ -42,14 +38,13 @@ import {
   Bell,
   HardHat,
   Accessibility,
-  Droplets,
   Trees,
   DoorOpen,
   LayoutGrid
 } from 'lucide-react';
 import { translations } from './translations';
 import { GALLERY_DATA, LOGO_URL, ROOMS_DATA, SOCIAL_LINKS, BOOKING_LINKS } from './constants';
-import { Language, GalleryImage, Room } from './types';
+import { Language, Room } from './types';
 
 const LanguageSwitcher = ({ current, setLang }: { current: Language, setLang: (l: Language) => void }) => {
   const flags = {
@@ -59,7 +54,7 @@ const LanguageSwitcher = ({ current, setLang }: { current: Language, setLang: (l
   };
 
   return (
-    <div className="flex gap-2 p-1.5 bg-black/40 backdrop-blur-xl rounded-full border border-white/20 shadow-2xl">
+    <div className="flex gap-2 p-1.5 bg-black/40 backdrop-blur-xl rounded-full border border-white/20 shadow-2xl pointer-events-auto">
       {(['sq', 'en', 'de'] as Language[]).map(l => (
         <motion.button
           key={l}
@@ -180,27 +175,26 @@ export default function App() {
     <div className="relative min-h-screen bg-stone-50 text-stone-900 overflow-x-hidden selection:bg-[#d4af37] selection:text-white">
       
       {/* Premium Header */}
-      <nav className="fixed w-full z-[120] py-6 md:py-8 px-4 md:px-16 pointer-events-none">
-        <div className="max-w-[1700px] mx-auto flex items-center justify-between pointer-events-auto bg-black/10 backdrop-blur-md rounded-full px-6 py-3 border border-white/5">
-          <div className="flex-none">
-            <img src={LOGO_URL} alt="Logo" className="h-12 md:h-20 drop-shadow-2xl" />
+      <nav className="fixed w-full z-[120] py-4 md:py-6 px-4 md:px-16 pointer-events-none">
+        <div className="max-w-[1700px] mx-auto flex items-center justify-between pointer-events-auto bg-black/30 backdrop-blur-xl rounded-full px-6 py-3 border border-white/10 shadow-2xl">
+          <div className="flex-none flex items-center">
+            <img src={LOGO_URL} alt="Logo" className="h-10 md:h-16 drop-shadow-2xl" />
           </div>
 
-          {/* Language Switcher between Logo and Menu on ALL devices */}
           <div className="flex items-center gap-4">
              <LanguageSwitcher current={lang} setLang={setLang} />
           </div>
 
           <div className="flex items-center gap-4 md:gap-12">
             <div className="hidden lg:flex gap-8 text-white text-[9px] font-black uppercase tracking-[0.3em]">
-              <a href="#rooms" onClick={(e) => handleNavClick(e, 'rooms')} className="hover:text-[#d4af37] transition-all">Dhomat</a>
-              <a href="#gallery" onClick={(e) => handleNavClick(e, 'gallery')} className="hover:text-[#d4af37] transition-all">Galeria</a>
-              <a href="#nearby" onClick={(e) => handleNavClick(e, 'nearby')} className="hover:text-[#d4af37] transition-all">Çfarë ka afër</a>
-              <a href="#facilities" onClick={(e) => handleNavClick(e, 'facilities')} className="hover:text-[#d4af37] transition-all">Fasilitetet</a>
+              <a href="#rooms" onClick={(e) => handleNavClick(e, 'rooms')} className="hover:text-[#d4af37] transition-all">{t.rooms}</a>
+              <a href="#gallery" onClick={(e) => handleNavClick(e, 'gallery')} className="hover:text-[#d4af37] transition-all">{t.gallery}</a>
+              <a href="#nearby" onClick={(e) => handleNavClick(e, 'nearby')} className="hover:text-[#d4af37] transition-all">{t.nearby}</a>
+              <a href="#facilities" onClick={(e) => handleNavClick(e, 'facilities')} className="hover:text-[#d4af37] transition-all">{t.facilities}</a>
             </div>
             <button 
               onClick={() => setMobileMenuOpen(true)} 
-              className="bg-black/30 backdrop-blur-xl text-white p-3 rounded-2xl border border-white/10 hover:bg-[#d4af37] transition-all shadow-2xl"
+              className="bg-white/10 backdrop-blur-xl text-white p-2.5 rounded-2xl border border-white/10 hover:bg-[#d4af37] transition-all shadow-xl"
             >
               <Menu size={20} />
             </button>
@@ -222,10 +216,10 @@ export default function App() {
               <button onClick={() => setMobileMenuOpen(false)} className="bg-white/10 p-5 rounded-full hover:bg-[#d4af37] transition-colors"><X size={32} /></button>
             </div>
             <div className="flex flex-col gap-10 text-4xl md:text-7xl font-serif italic mb-20">
-              <a href="#rooms" onClick={(e) => handleNavClick(e, 'rooms')}>Dhomat</a>
-              <a href="#gallery" onClick={(e) => handleNavClick(e, 'gallery')}>Galeria</a>
-              <a href="#nearby" onClick={(e) => handleNavClick(e, 'nearby')}>Çfarë ka afër</a>
-              <a href="#facilities" onClick={(e) => handleNavClick(e, 'facilities')}>Fasilitetet</a>
+              <a href="#rooms" onClick={(e) => handleNavClick(e, 'rooms')}>{t.rooms}</a>
+              <a href="#gallery" onClick={(e) => handleNavClick(e, 'gallery')}>{t.gallery}</a>
+              <a href="#nearby" onClick={(e) => handleNavClick(e, 'nearby')}>{t.nearby}</a>
+              <a href="#facilities" onClick={(e) => handleNavClick(e, 'facilities')}>{t.facilities}</a>
             </div>
             <div className="mt-auto flex flex-col md:flex-row justify-between items-start md:items-center gap-12 border-t border-white/10 pt-12">
               <div className="flex gap-10">
@@ -251,48 +245,47 @@ export default function App() {
             animate={{ y: 0, opacity: 1 }}
             className="mb-6 relative"
           >
-            <h1 className="text-7xl md:text-[14rem] font-serif italic leading-none select-none drop-shadow-2xl flex flex-col items-center">
+            <h1 className="text-6xl md:text-[10rem] font-serif italic leading-none select-none drop-shadow-2xl flex flex-col items-center">
               <span className="px-10 relative inline-block">
                 Kuint
               </span>
-              <span className="text-[#d4af37] not-italic font-sans font-black uppercase text-3xl md:text-7xl block tracking-[0.5em] mt-2 md:-mt-8">Hotel</span>
+              <span className="text-[#d4af37] not-italic font-sans font-black uppercase text-2xl md:text-6xl block tracking-[0.5em] mt-2 md:-mt-6">Hotel</span>
             </h1>
           </motion.div>
           
-          {/* Glow Gold/White Text for Breakfast */}
           <motion.div 
             initial={{ scale: 0 }}
             animate={{ scale: 1 }}
             transition={{ delay: 0.8 }}
             className="mb-12 py-3 px-8 rounded-full border border-[#d4af37]/40 bg-stone-950/60 backdrop-blur-2xl flex items-center gap-4 shadow-[0_0_50px_rgba(212,175,55,0.3)] group"
           >
-            <Star size={16} fill="#d4af37" color="#d4af37" className="group-hover:rotate-180 transition-transform duration-700" />
-            <span className="glow-text-pulse text-sm md:text-base font-black uppercase tracking-[0.4em] leading-tight">MËNGJES I MREKULLUESHËM</span>
-            <Star size={16} fill="#d4af37" color="#d4af37" className="group-hover:rotate-180 transition-transform duration-700" />
+            <Star size={16} fill="#d4af37" color="#d4af37" />
+            <span className="glow-text-pulse text-xs md:text-base font-black uppercase tracking-[0.4em] leading-tight">{t.wonderfulBreakfast}</span>
+            <Star size={16} fill="#d4af37" color="#d4af37" />
           </motion.div>
 
           <motion.p 
             initial={{ opacity: 0 }}
             animate={{ opacity: 0.8 }}
-            className="text-base md:text-2xl font-light mb-16 tracking-[0.5em] uppercase opacity-90"
+            className="text-sm md:text-2xl font-light mb-16 tracking-[0.5em] uppercase opacity-90"
           >
-            Kulmi i Luksit
+            {t.apexOfLuxury}
           </motion.p>
           
           <div className="flex flex-col md:flex-row gap-6 md:gap-8">
             <motion.a 
               href="#rooms" 
               onClick={(e) => handleNavClick(e, 'rooms')}
-              className="bg-[#d4af37] px-16 md:px-24 py-6 md:py-8 rounded-full text-[11px] md:text-sm font-black uppercase tracking-[0.3em] shadow-[0_20px_50px_rgba(212,175,55,0.4)] hover:scale-105 transition-all text-white"
+              className="bg-[#d4af37] px-12 md:px-20 py-5 md:py-7 rounded-full text-[10px] md:text-xs font-black uppercase tracking-[0.3em] shadow-[0_20px_50px_rgba(212,175,55,0.4)] hover:scale-105 transition-all text-white"
             >
-              Eksploro
+              {t.explore}
             </motion.a>
             <motion.a 
               href="#gallery" 
               onClick={(e) => handleNavClick(e, 'gallery')}
-              className="border-2 border-white/30 backdrop-blur-xl px-16 md:px-24 py-6 md:py-8 rounded-full text-[11px] md:text-sm font-black uppercase tracking-[0.3em] hover:bg-white hover:text-stone-900 transition-all shadow-2xl text-white"
+              className="border-2 border-white/30 backdrop-blur-xl px-12 md:px-20 py-5 md:py-7 rounded-full text-[10px] md:text-xs font-black uppercase tracking-[0.3em] hover:bg-white hover:text-stone-900 transition-all shadow-2xl text-white"
             >
-              Galeria
+              {t.gallery}
             </motion.a>
           </div>
         </div>
@@ -307,10 +300,10 @@ export default function App() {
         </motion.div>
       </header>
 
-      {/* Redesigned Booking Buttons Section */}
+      {/* Booking Buttons Section */}
       <section className="py-24 bg-white relative z-20">
         <div className="max-w-7xl mx-auto px-6 md:px-8">
-          <SectionHeading title="Rezervo Tani" subtitle="Zgjidhni partnerin tuaj" />
+          <SectionHeading title={t.bookNow} subtitle="Partners" />
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
             {[
               { name: "Agoda", link: BOOKING_LINKS.agoda, color: "bg-blue-50 text-blue-900", sub: "Easy Booking" },
@@ -328,7 +321,7 @@ export default function App() {
                 <p className="text-[10px] font-black uppercase tracking-widest opacity-60 mb-6">{btn.sub}</p>
                 <div className="bg-current opacity-10 w-full h-px mb-6" />
                 <span className="text-[10px] md:text-[11px] font-black uppercase tracking-[0.4em] flex items-center gap-2">
-                  Rezervo <ChevronRight size={14} />
+                  {t.bookNow} <ChevronRight size={14} />
                 </span>
               </motion.a>
             ))}
@@ -339,19 +332,20 @@ export default function App() {
       {/* Rooms Section */}
       <section id="rooms" className="py-24 md:py-40 bg-stone-50">
         <div className="max-w-[1500px] mx-auto px-6 md:px-16">
-          <div className="flex flex-col lg:flex-row justify-between items-end mb-24 gap-12">
+          <div className="flex flex-col lg:flex-row justify-between items-end mb-24 gap-12 text-left">
             <div className="max-w-3xl">
-              <SectionHeading title="Dhomat tona" subtitle="Relaksim Total" />
-              <p className="text-stone-400 text-xl md:text-3xl font-light leading-relaxed -mt-8">Mëngjes i mrekullueshëm i përfshirë në çdo dhomë. Eksperience unike e luksit në Pejë.</p>
+              <span className="text-[#d4af37] text-[10px] font-black uppercase tracking-[0.5em] mb-4 block">Relaksim Total</span>
+              <h2 className="text-5xl md:text-8xl font-serif italic mb-8 italic">{t.rooms}</h2>
+              <p className="text-stone-400 text-xl md:text-3xl font-light leading-relaxed">{t.wonderfulBreakfast}. Eksperience unike e luksit në Pejë.</p>
             </div>
             
             <div className="bg-white p-8 md:p-12 rounded-[2.5rem] md:rounded-[3.5rem] shadow-2xl border border-stone-100 flex items-center gap-8 md:gap-10">
               <div className="text-right">
-                <p className="text-[10px] md:text-[11px] text-stone-400 font-black uppercase tracking-[0.3em] mb-2 md:mb-3">Pikët tona</p>
+                <p className="text-[10px] md:text-[11px] text-stone-400 font-black uppercase tracking-[0.3em] mb-2 md:mb-3">{t.reviewScore}</p>
                 <div className="flex gap-1 md:gap-1.5 mb-1.5">
                   {[1,2,3,4,5].map(i => <Star key={i} size={14} fill="#d4af37" color="#d4af37" />)}
                 </div>
-                <p className="font-serif text-2xl md:text-4xl italic text-stone-900">E shkëlqyeshme</p>
+                <p className="font-serif text-2xl md:text-4xl italic text-stone-900">{t.exceptional}</p>
               </div>
               <div className="w-16 h-16 md:w-24 md:h-24 bg-stone-900 text-[#d4af37] rounded-2xl md:rounded-[2rem] flex flex-col items-center justify-center font-serif text-3xl md:text-6xl italic border-2 md:border-4 border-[#d4af37]/20 shadow-2xl">
                 9.5
@@ -366,96 +360,81 @@ export default function App() {
         </div>
       </section>
 
-      {/* COMPREHENSIVE FACILITIES SECTION */}
+      {/* Facilities Section */}
       <section id="facilities" className="py-24 md:py-40 bg-white">
         <div className="max-w-[1500px] mx-auto px-6 md:px-16">
-          <SectionHeading title="Fasilitetet tona" subtitle="Gjithçka që ju nevojitet" />
+          <SectionHeading title={t.facilities} subtitle={t.mostPopular} />
           
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12 md:gap-16">
-            
-            {/* Highlights */}
             <div className="space-y-10">
               <h4 className="text-[#d4af37] text-[10px] md:text-[11px] font-black uppercase tracking-[0.4em] flex items-center gap-4">
-                <Sparkles size={20} /> Ideale për qëndrimin tuaj
+                <Sparkles size={20} /> {t.facilityCategories.highlights}
               </h4>
               <ul className="space-y-4 text-stone-600 font-medium text-sm">
-                <li className="flex items-center gap-4 bg-stone-50 p-5 rounded-3xl"><Utensils size={20} className="text-[#d4af37]" /> Restorant</li>
-                <li className="flex items-center gap-4 bg-stone-50 p-5 rounded-3xl"><Car size={20} className="text-[#d4af37]" /> Parking falas</li>
-                <li className="flex items-center gap-4 bg-stone-50 p-5 rounded-3xl"><Wifi size={20} className="text-[#d4af37]" /> Wifi falas</li>
+                <li className="flex items-center gap-4 bg-stone-50 p-5 rounded-3xl"><Utensils size={20} className="text-[#d4af37]" /> {t.restaurant}</li>
+                <li className="flex items-center gap-4 bg-stone-50 p-5 rounded-3xl"><Car size={20} className="text-[#d4af37]" /> {t.freeParking}</li>
+                <li className="flex items-center gap-4 bg-stone-50 p-5 rounded-3xl"><Wifi size={20} className="text-[#d4af37]" /> {t.freeWifi}</li>
                 <li className="flex items-center gap-4 bg-stone-50 p-5 rounded-3xl"><Dog size={20} className="text-[#d4af37]" /> Pet friendly</li>
-                <li className="flex items-center gap-4 bg-stone-50 p-5 rounded-3xl"><Dumbbell size={20} className="text-[#d4af37]" /> Fitness</li>
-                <li className="flex items-center gap-4 bg-stone-50 p-5 rounded-3xl"><Plane size={20} className="text-[#d4af37]" /> Airport Shuttle</li>
+                <li className="flex items-center gap-4 bg-stone-50 p-5 rounded-3xl"><Dumbbell size={20} className="text-[#d4af37]" /> {t.fitness}</li>
+                <li className="flex items-center gap-4 bg-stone-50 p-5 rounded-3xl"><Plane size={20} className="text-[#d4af37]" /> {t.airportShuttle}</li>
               </ul>
             </div>
 
-            {/* Outdoors & Food */}
             <div className="space-y-10">
               <h4 className="text-[#d4af37] text-[10px] md:text-[11px] font-black uppercase tracking-[0.4em] flex items-center gap-4">
-                <LayoutGrid size={20} /> Outdoors & Garden
+                <LayoutGrid size={20} /> {t.facilityCategories.outdoors}
               </h4>
               <ul className="space-y-4 text-stone-600 font-medium text-sm">
-                <li className="flex items-center gap-4"><CheckCircle size={16} className="text-[#d4af37]" /> Mobilje të jashtme</li>
-                <li className="flex items-center gap-4"><CheckCircle size={16} className="text-[#d4af37]" /> Terasë & Kopsht</li>
+                <li className="flex items-center gap-4"><CheckCircle size={16} className="text-[#d4af37]" /> Outdoor furniture</li>
+                <li className="flex items-center gap-4"><CheckCircle size={16} className="text-[#d4af37]" /> Terrace & Garden</li>
               </ul>
               
               <h4 className="text-[#d4af37] text-[10px] md:text-[11px] font-black uppercase tracking-[0.4em] flex items-center gap-4 pt-6">
-                <Coffee size={20} /> Food & Drink
+                <Coffee size={20} /> {t.facilityCategories.food}
               </h4>
               <ul className="space-y-4 text-stone-600 font-medium text-sm">
                 <li className="flex items-center gap-4"><CheckCircle size={16} className="text-[#d4af37]" /> Coffee house on site</li>
-                <li className="flex items-center gap-4"><CheckCircle size={16} className="text-[#d4af37]" /> Fruta (Extra)</li>
-                <li className="flex items-center gap-4"><CheckCircle size={16} className="text-[#d4af37]" /> Verë/Shampanjë (Extra)</li>
+                <li className="flex items-center gap-4"><CheckCircle size={16} className="text-[#d4af37]" /> Wine/Champagne (Extra)</li>
                 <li className="flex items-center gap-4"><CheckCircle size={16} className="text-[#d4af37]" /> Buffet per fëmijë</li>
-                <li className="flex items-center gap-4"><CheckCircle size={16} className="text-[#d4af37]" /> Snack bar & Bar</li>
               </ul>
             </div>
 
-            {/* Reception & Safety */}
             <div className="space-y-10">
               <h4 className="text-[#d4af37] text-[10px] md:text-[11px] font-black uppercase tracking-[0.4em] flex items-center gap-4">
-                <DoorOpen size={20} /> Front Desk Services
+                <ShieldCheck size={20} /> {t.facilityCategories.safety}
               </h4>
               <ul className="space-y-4 text-stone-600 font-medium text-sm">
-                <li className="flex items-center gap-4"><CheckCircle size={16} className="text-[#d4af37]" /> Lockers</li>
-                <li className="flex items-center gap-4"><CheckCircle size={16} className="text-[#d4af37]" /> Private check-in/out</li>
-                <li className="flex items-center gap-4"><CheckCircle size={16} className="text-[#d4af37]" /> Bagazh (Extra)</li>
-                <li className="flex items-center gap-4"><CheckCircle size={16} className="text-[#d4af37]" /> 24-hour front desk</li>
-              </ul>
-
-              <h4 className="text-[#d4af37] text-[10px] md:text-[11px] font-black uppercase tracking-[0.4em] flex items-center gap-4 pt-6">
-                <ShieldCheck size={20} /> Siguria
-              </h4>
-              <ul className="space-y-4 text-stone-600 font-medium text-sm">
-                <li className="flex items-center gap-4"><CheckCircle size={16} className="text-[#d4af37]" /> Fire extinguishers</li>
-                <li className="flex items-center gap-4"><CheckCircle size={16} className="text-[#d4af37]" /> CCTV outside</li>
-                <li className="flex items-center gap-4"><CheckCircle size={16} className="text-[#d4af37]" /> CCTV common areas</li>
-                <li className="flex items-center gap-4"><CheckCircle size={16} className="text-[#d4af37]" /> Smoke alarms</li>
                 <li className="flex items-center gap-4"><CheckCircle size={16} className="text-[#d4af37]" /> 24-hour security</li>
-              </ul>
-            </div>
-
-            {/* General & Cleaning */}
-            <div className="space-y-10">
-              <h4 className="text-[#d4af37] text-[10px] md:text-[11px] font-black uppercase tracking-[0.4em] flex items-center gap-4">
-                <LayoutGrid size={20} /> General
-              </h4>
-              <ul className="space-y-4 text-stone-600 font-medium text-sm">
-                <li className="flex items-center gap-4"><CheckCircle size={16} className="text-[#d4af37]" /> Shuttle service (Extra)</li>
-                <li className="flex items-center gap-4"><CheckCircle size={16} className="text-[#d4af37]" /> Air conditioning</li>
-                <li className="flex items-center gap-4"><CheckCircle size={16} className="text-[#d4af37]" /> Soundproof rooms</li>
-                <li className="flex items-center gap-4"><CheckCircle size={16} className="text-[#d4af37]" /> Elevator</li>
-                <li className="flex items-center gap-4"><CheckCircle size={16} className="text-[#d4af37]" /> Dhoma jo-duhanpirëse</li>
+                <li className="flex items-center gap-4"><CheckCircle size={16} className="text-[#d4af37]" /> CCTV common areas</li>
+                <li className="flex items-center gap-4"><CheckCircle size={16} className="text-[#d4af37]" /> Fire extinguishers</li>
               </ul>
 
               <h4 className="text-[#d4af37] text-[10px] md:text-[11px] font-black uppercase tracking-[0.4em] flex items-center gap-4 pt-6">
-                <Accessibility size={20} /> Aksesueshmëria
+                <DoorOpen size={20} /> {t.facilityCategories.reception}
+              </h4>
+              <ul className="space-y-4 text-stone-600 font-medium text-sm">
+                <li className="flex items-center gap-4"><CheckCircle size={16} className="text-[#d4af37]" /> 24-hour front desk</li>
+                <li className="flex items-center gap-4"><CheckCircle size={16} className="text-[#d4af37]" /> Private check-in/out</li>
+              </ul>
+            </div>
+
+            <div className="space-y-10">
+              <h4 className="text-[#d4af37] text-[10px] md:text-[11px] font-black uppercase tracking-[0.4em] flex items-center gap-4">
+                <Shirt size={20} /> {t.facilityCategories.cleaning}
+              </h4>
+              <ul className="space-y-4 text-stone-600 font-medium text-sm">
+                <li className="flex items-center gap-4"><CheckCircle size={16} className="text-[#d4af37]" /> Daily housekeeping</li>
+                <li className="flex items-center gap-4"><CheckCircle size={16} className="text-[#d4af37]" /> Laundry (Extra)</li>
+              </ul>
+
+              <h4 className="text-[#d4af37] text-[10px] md:text-[11px] font-black uppercase tracking-[0.4em] flex items-center gap-4 pt-6">
+                <Accessibility size={20} /> {t.facilityCategories.accessibility}
               </h4>
               <ul className="space-y-4 text-stone-600 font-medium text-sm">
                 <li className="flex items-center gap-4"><CheckCircle size={16} className="text-[#d4af37]" /> Wheelchair accessible</li>
                 <li className="flex items-center gap-4"><CheckCircle size={16} className="text-[#d4af37]" /> Raised toilet</li>
               </ul>
             </div>
-
           </div>
         </div>
       </section>
@@ -467,9 +446,9 @@ export default function App() {
 
       {/* Destination / Nearby */}
       <section id="nearby" className="py-24 md:py-40 bg-stone-50">
-        <div className="max-w-[1500px] mx-auto px-6 md:px-16 grid grid-cols-1 lg:grid-cols-2 gap-20 md:gap-32">
+        <div className="max-w-[1500px] mx-auto px-6 md:px-16 grid grid-cols-1 lg:grid-cols-2 gap-20 md:gap-32 text-left">
           <div>
-            <SectionHeading title="Çfarë ka afër" subtitle="Zbuloni Pejën" />
+            <SectionHeading title={t.nearby} subtitle={t.destination} />
             <div className="space-y-8 md:space-y-10">
               {[
                 { icon: <Building size={24} />, title: t.nearbyInfo.museum, dist: "2.2 km" },
@@ -503,15 +482,15 @@ export default function App() {
       <footer className="bg-stone-950 text-white py-32 md:py-40 px-6 md:px-8">
         <div className="max-w-[1500px] mx-auto flex flex-col items-center text-center">
           <img src={LOGO_URL} alt="Logo" className="h-32 md:h-40 mb-16 md:mb-20 drop-shadow-2xl" />
-          <h3 className="text-4xl md:text-[9rem] font-serif italic mb-10 md:mb-12 leading-none">Qëndrimi i ëndrrave</h3>
+          <h3 className="text-4xl md:text-[9rem] font-serif italic mb-10 md:mb-12 leading-none">{t.dreamStay}</h3>
           <p className="max-w-4xl text-stone-400 text-lg md:text-4xl font-light mb-20 md:mb-24 italic opacity-80 leading-relaxed px-4">
             "{t.legacyOfExcellence}"
           </p>
           <div className="flex flex-wrap justify-center gap-8 md:gap-16 text-[10px] md:text-[11px] font-black uppercase tracking-[0.3em] text-stone-500 mb-24 md:mb-32">
-             <a href="#rooms" onClick={(e) => handleNavClick(e, 'rooms')} className="hover:text-[#d4af37] transition-all tracking-[0.4em] md:tracking-[0.8em]">Dhomat</a>
-             <a href="#gallery" onClick={(e) => handleNavClick(e, 'gallery')} className="hover:text-[#d4af37] transition-all tracking-[0.4em] md:tracking-[0.8em]">Galeria</a>
-             <a href="#nearby" onClick={(e) => handleNavClick(e, 'nearby')} className="hover:text-[#d4af37] transition-all tracking-[0.4em] md:tracking-[0.8em]">Çfarë ka afër</a>
-             <a href="#facilities" onClick={(e) => handleNavClick(e, 'facilities')} className="hover:text-[#d4af37] transition-all tracking-[0.4em] md:tracking-[0.8em]">Fasilitetet</a>
+             <a href="#rooms" onClick={(e) => handleNavClick(e, 'rooms')} className="hover:text-[#d4af37] transition-all">{t.rooms}</a>
+             <a href="#gallery" onClick={(e) => handleNavClick(e, 'gallery')} className="hover:text-[#d4af37] transition-all">{t.gallery}</a>
+             <a href="#nearby" onClick={(e) => handleNavClick(e, 'nearby')} className="hover:text-[#d4af37] transition-all">{t.nearby}</a>
+             <a href="#facilities" onClick={(e) => handleNavClick(e, 'facilities')} className="hover:text-[#d4af37] transition-all">{t.facilities}</a>
           </div>
           <div className="w-full h-px bg-white/5 mb-20 md:mb-24" />
           <div className="flex flex-col md:flex-row justify-between w-full gap-10 md:gap-12 text-stone-600 text-[10px] md:text-[11px] font-black uppercase tracking-[0.2em] md:tracking-[0.3em]">
@@ -546,7 +525,7 @@ const GallerySection = ({ lang }: { lang: Language }) => {
   return (
     <div className="max-w-[1800px] mx-auto px-6 md:px-8">
       <div className="text-center mb-16 md:mb-24">
-        <h2 className="text-5xl md:text-[12rem] font-serif mb-12 md:mb-16 italic tracking-tighter leading-none">Galeria</h2>
+        <h2 className="text-5xl md:text-[12rem] font-serif mb-12 md:mb-16 italic tracking-tighter leading-none">{t.gallery}</h2>
         <div className="flex flex-wrap justify-center gap-4 md:gap-6">
           {categories.map(cat => (
             <button
