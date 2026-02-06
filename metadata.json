@@ -1,0 +1,7 @@
+{
+  "name": "Kuint Hotel VIP Experience",
+  "description": "A premium, multi-lingual luxury hotel website for Kuint Hotel, featuring high-end animations, detailed room listings, and direct booking integrations.",
+  "requestFramePermissions": [
+    "geolocation"
+  ]
+}
