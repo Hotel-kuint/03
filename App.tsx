@@ -181,7 +181,7 @@ export default function App() {
       
       {/* Premium Header */}
       <nav className="fixed w-full z-[120] py-6 md:py-8 px-4 md:px-16 pointer-events-none">
-        <div className="max-w-[1700px] mx-auto flex items-center justify-between pointer-events-auto bg-black/10 backdrop-blur-md rounded-full px-6 py-3 border border-white/5">
+        <div className="max-w-[1300px] mx-auto flex items-center justify-between pointer-events-auto bg-black/10 backdrop-blur-md rounded-full px-6 py-3 border border-white/5">
           <div className="flex-none">
             <img src={LOGO_URL} alt="Logo" className="h-12 md:h-20 drop-shadow-2xl" />
           </div>
