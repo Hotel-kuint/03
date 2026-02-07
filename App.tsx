@@ -12,35 +12,22 @@ import {
   Utensils, 
   Dumbbell, 
   Users, 
-  Wine, 
-  CigaretteOff, 
   CheckCircle,
-  Clock,
   Instagram,
   Facebook,
-  CreditCard,
-  Building,
   Menu,
   X,
   Plane,
-  Briefcase,
   ShieldCheck,
   Trophy,
-  Tv,
-  Thermometer,
-  Shield,
   Star,
   Dog,
-  Sparkles,
-  Shirt,
-  Flame,
-  Camera,
-  Bell,
-  HardHat,
-  Accessibility,
-  Trees,
   DoorOpen,
-  LayoutGrid
+  LayoutGrid,
+  Shirt,
+  Sparkles,
+  Accessibility,
+  Building
 } from 'lucide-react';
 import { translations } from './translations';
 import { GALLERY_DATA, LOGO_URL, ROOMS_DATA, SOCIAL_LINKS, BOOKING_LINKS } from './constants';
@@ -54,14 +41,14 @@ const LanguageSwitcher = ({ current, setLang }: { current: Language, setLang: (l
   };
 
   return (
-    <div className="flex gap-2 p-1.5 bg-black/40 backdrop-blur-xl rounded-full border border-white/20 shadow-2xl pointer-events-auto">
+    <div className="flex gap-2 p-1 md:p-1.5 bg-black/40 backdrop-blur-xl rounded-full border border-white/20 shadow-2xl pointer-events-auto">
       {(['sq', 'en', 'de'] as Language[]).map(l => (
         <motion.button
           key={l}
-          whileHover={{ scale: 1.15, y: -2 }}
+          whileHover={{ scale: 1.1, y: -2 }}
           whileTap={{ scale: 0.9 }}
           onClick={() => setLang(l)}
-          className={`relative w-7 h-7 md:w-8 md:h-8 rounded-full overflow-hidden border-2 transition-all ${current === l ? 'border-[#d4af37] ring-2 ring-[#d4af37]/30' : 'border-transparent opacity-50 grayscale hover:grayscale-0 hover:opacity-100'}`}
+          className={`relative w-6 h-6 md:w-8 md:h-8 rounded-full overflow-hidden border transition-all ${current === l ? 'border-[#d4af37] ring-2 ring-[#d4af37]/30' : 'border-transparent opacity-50 grayscale hover:grayscale-0 hover:opacity-100'}`}
         >
           <img src={flags[l]} alt={l} className="w-full h-full object-cover" />
         </motion.button>
@@ -117,7 +104,7 @@ const RoomCard: React.FC<{ room: Room; lang: Language }> = ({ room, lang }) => {
         />
         <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent opacity-0 group-hover:opacity-100 transition-opacity" />
       </div>
-      <div className="p-8 flex flex-col flex-grow">
+      <div className="p-8 flex flex-col flex-grow text-left">
         <h3 className="font-serif text-2xl md:text-3xl text-stone-900 mb-2 group-hover:text-[#d4af37] transition-colors">{room.title[lang]}</h3>
         <p className="text-stone-400 text-xs font-mono uppercase tracking-[0.2em] mb-4">{room.size}</p>
         
@@ -152,7 +139,7 @@ const RoomCard: React.FC<{ room: Room; lang: Language }> = ({ room, lang }) => {
 const SectionHeading = ({ title, subtitle }: { title: string; subtitle?: string }) => (
   <div className="text-center mb-16 px-6">
     {subtitle && <span className="text-[#d4af37] text-[10px] font-black uppercase tracking-[0.5em] mb-4 block">{subtitle}</span>}
-    <h2 className="text-4xl md:text-8xl font-serif italic mb-6 leading-tight">{title}</h2>
+    <h2 className="text-4xl md:text-7xl font-serif italic mb-6 leading-tight">{title}</h2>
     <div className="w-20 h-[1px] bg-[#d4af37] mx-auto" />
   </div>
 );
@@ -175,18 +162,18 @@ export default function App() {
     <div className="relative min-h-screen bg-stone-50 text-stone-900 overflow-x-hidden selection:bg-[#d4af37] selection:text-white">
       
       {/* Premium Header */}
-      <nav className="fixed w-full z-[120] py-4 md:py-6 px-4 md:px-16 pointer-events-none">
-        <div className="max-w-[1700px] mx-auto flex items-center justify-between pointer-events-auto bg-black/30 backdrop-blur-xl rounded-full px-6 py-3 border border-white/10 shadow-2xl">
+      <nav className="fixed w-full z-[120] py-3 md:py-4 px-4 md:px-12 pointer-events-none">
+        <div className="max-w-[1600px] mx-auto flex items-center justify-between pointer-events-auto bg-black/40 backdrop-blur-xl rounded-full px-5 py-2 border border-white/10 shadow-2xl">
           <div className="flex-none flex items-center">
-            <img src={LOGO_URL} alt="Logo" className="h-10 md:h-16 drop-shadow-2xl" />
+            <img src={LOGO_URL} alt="Logo" className="h-8 md:h-12 drop-shadow-2xl" />
           </div>
 
           <div className="flex items-center gap-4">
              <LanguageSwitcher current={lang} setLang={setLang} />
           </div>
 
-          <div className="flex items-center gap-4 md:gap-12">
-            <div className="hidden lg:flex gap-8 text-white text-[9px] font-black uppercase tracking-[0.3em]">
+          <div className="flex items-center gap-4 md:gap-10">
+            <div className="hidden lg:flex gap-6 text-white text-[9px] font-black uppercase tracking-[0.2em]">
               <a href="#rooms" onClick={(e) => handleNavClick(e, 'rooms')} className="hover:text-[#d4af37] transition-all">{t.rooms}</a>
               <a href="#gallery" onClick={(e) => handleNavClick(e, 'gallery')} className="hover:text-[#d4af37] transition-all">{t.gallery}</a>
               <a href="#nearby" onClick={(e) => handleNavClick(e, 'nearby')} className="hover:text-[#d4af37] transition-all">{t.nearby}</a>
@@ -194,9 +181,9 @@ export default function App() {
             </div>
             <button 
               onClick={() => setMobileMenuOpen(true)} 
-              className="bg-white/10 backdrop-blur-xl text-white p-2.5 rounded-2xl border border-white/10 hover:bg-[#d4af37] transition-all shadow-xl"
+              className="bg-white/10 backdrop-blur-xl text-white p-2 md:p-3 rounded-2xl border border-white/10 hover:bg-[#d4af37] transition-all shadow-xl"
             >
-              <Menu size={20} />
+              <Menu size={18} />
             </button>
           </div>
         </div>
@@ -234,22 +221,25 @@ export default function App() {
 
       <FloatingContact lang={lang} />
 
-      {/* Hero Section */}
+      {/* Hero Section - Lowered content further for desktop to clear header blur and reduced text size */}
       <header className="relative h-screen flex items-center justify-center text-white text-center px-6 overflow-hidden">
         <img src="https://i.ibb.co/TDxFv24d/205530626.jpg" alt="Hero" className="absolute inset-0 w-full h-full object-cover brightness-[0.4]" />
         <div className="absolute inset-0 bg-gradient-to-b from-black/60 via-transparent to-stone-50" />
         
-        <div className="relative z-10 flex flex-col items-center max-w-6xl">
+        {/* Added lg:pt-64 for more clearance on PC */}
+        <div className="relative z-10 flex flex-col items-center max-w-6xl lg:pt-64">
           <motion.div 
             initial={{ y: 50, opacity: 0 }}
             animate={{ y: 0, opacity: 1 }}
             className="mb-6 relative"
           >
-            <h1 className="text-6xl md:text-[10rem] font-serif italic leading-none select-none drop-shadow-2xl flex flex-col items-center">
+            {/* Reduced text size for Kuint from md:text-[8rem] to md:text-7xl for better proportions on PC */}
+            <h1 className="text-5xl md:text-7xl font-serif italic leading-none select-none drop-shadow-2xl flex flex-col items-center">
               <span className="px-10 relative inline-block">
                 Kuint
               </span>
-              <span className="text-[#d4af37] not-italic font-sans font-black uppercase text-2xl md:text-6xl block tracking-[0.5em] mt-2 md:-mt-6">Hotel</span>
+              {/* Reduced size for Hotel from md:text-5xl to md:text-3xl */}
+              <span className="text-[#d4af37] not-italic font-sans font-black uppercase text-xl md:text-3xl block tracking-[0.5em] mt-2 md:-mt-2">Hotel</span>
             </h1>
           </motion.div>
           
@@ -257,33 +247,33 @@ export default function App() {
             initial={{ scale: 0 }}
             animate={{ scale: 1 }}
             transition={{ delay: 0.8 }}
-            className="mb-12 py-3 px-8 rounded-full border border-[#d4af37]/40 bg-stone-950/60 backdrop-blur-2xl flex items-center gap-4 shadow-[0_0_50px_rgba(212,175,55,0.3)] group"
+            className="mb-10 py-3 px-8 rounded-full border border-[#d4af37]/40 bg-stone-950/60 backdrop-blur-2xl flex items-center gap-4 shadow-[0_0_50px_rgba(212,175,55,0.3)] group"
           >
             <Star size={16} fill="#d4af37" color="#d4af37" />
-            <span className="glow-text-pulse text-xs md:text-base font-black uppercase tracking-[0.4em] leading-tight">{t.wonderfulBreakfast}</span>
+            <span className="glow-text-pulse text-xs md:text-sm font-black uppercase tracking-[0.4em] leading-tight">{t.wonderfulBreakfast}</span>
             <Star size={16} fill="#d4af37" color="#d4af37" />
           </motion.div>
 
           <motion.p 
             initial={{ opacity: 0 }}
             animate={{ opacity: 0.8 }}
-            className="text-sm md:text-2xl font-light mb-16 tracking-[0.5em] uppercase opacity-90"
+            className="text-sm md:text-xl font-light mb-14 tracking-[0.5em] uppercase opacity-90"
           >
             {t.apexOfLuxury}
           </motion.p>
           
-          <div className="flex flex-col md:flex-row gap-6 md:gap-8">
+          <div className="flex flex-col md:flex-row gap-5 md:gap-7">
             <motion.a 
               href="#rooms" 
               onClick={(e) => handleNavClick(e, 'rooms')}
-              className="bg-[#d4af37] px-12 md:px-20 py-5 md:py-7 rounded-full text-[10px] md:text-xs font-black uppercase tracking-[0.3em] shadow-[0_20px_50px_rgba(212,175,55,0.4)] hover:scale-105 transition-all text-white"
+              className="bg-[#d4af37] px-10 md:px-16 py-4 md:py-6 rounded-full text-[10px] md:text-xs font-black uppercase tracking-[0.3em] shadow-[0_20px_50px_rgba(212,175,55,0.4)] hover:scale-105 transition-all text-white"
             >
               {t.explore}
             </motion.a>
             <motion.a 
               href="#gallery" 
               onClick={(e) => handleNavClick(e, 'gallery')}
-              className="border-2 border-white/30 backdrop-blur-xl px-12 md:px-20 py-5 md:py-7 rounded-full text-[10px] md:text-xs font-black uppercase tracking-[0.3em] hover:bg-white hover:text-stone-900 transition-all shadow-2xl text-white"
+              className="border-2 border-white/30 backdrop-blur-xl px-10 md:px-16 py-4 md:py-6 rounded-full text-[10px] md:text-xs font-black uppercase tracking-[0.3em] hover:bg-white hover:text-stone-900 transition-all shadow-2xl text-white"
             >
               {t.gallery}
             </motion.a>
@@ -293,17 +283,17 @@ export default function App() {
         <motion.div 
           animate={{ y: [0, 15, 0] }} 
           transition={{ repeat: Infinity, duration: 2 }}
-          className="absolute bottom-12 left-1/2 -translate-x-1/2 opacity-40 text-center flex flex-col items-center gap-4"
+          className="absolute bottom-10 left-1/2 -translate-x-1/2 opacity-40 text-center flex flex-col items-center gap-3"
         >
-          <span className="text-[10px] font-black uppercase tracking-[0.6em]">Scroll to Discover</span>
-          <div className="w-px h-16 bg-gradient-to-b from-white to-transparent" />
+          <span className="text-[10px] font-black uppercase tracking-[0.6em]">{t.scrollDiscover}</span>
+          <div className="w-px h-12 bg-gradient-to-b from-white to-transparent" />
         </motion.div>
       </header>
 
-      {/* Booking Buttons Section */}
+      {/* Booking Partners Section */}
       <section className="py-24 bg-white relative z-20">
         <div className="max-w-7xl mx-auto px-6 md:px-8">
-          <SectionHeading title={t.bookNow} subtitle="Partners" />
+          <SectionHeading title={t.bookNow} subtitle={t.partners} />
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
             {[
               { name: "Agoda", link: BOOKING_LINKS.agoda, color: "bg-blue-50 text-blue-900", sub: "Easy Booking" },
@@ -334,8 +324,8 @@ export default function App() {
         <div className="max-w-[1500px] mx-auto px-6 md:px-16">
           <div className="flex flex-col lg:flex-row justify-between items-end mb-24 gap-12 text-left">
             <div className="max-w-3xl">
-              <span className="text-[#d4af37] text-[10px] font-black uppercase tracking-[0.5em] mb-4 block">Relaksim Total</span>
-              <h2 className="text-5xl md:text-8xl font-serif italic mb-8 italic">{t.rooms}</h2>
+              <span className="text-[#d4af37] text-[10px] font-black uppercase tracking-[0.5em] mb-4 block">{t.totalRelax}</span>
+              <h2 className="text-5xl md:text-8xl font-serif italic mb-8">{t.rooms}</h2>
               <p className="text-stone-400 text-xl md:text-3xl font-light leading-relaxed">{t.wonderfulBreakfast}. Eksperience unike e luksit në Pejë.</p>
             </div>
             
@@ -374,8 +364,7 @@ export default function App() {
                 <li className="flex items-center gap-4 bg-stone-50 p-5 rounded-3xl"><Utensils size={20} className="text-[#d4af37]" /> {t.restaurant}</li>
                 <li className="flex items-center gap-4 bg-stone-50 p-5 rounded-3xl"><Car size={20} className="text-[#d4af37]" /> {t.freeParking}</li>
                 <li className="flex items-center gap-4 bg-stone-50 p-5 rounded-3xl"><Wifi size={20} className="text-[#d4af37]" /> {t.freeWifi}</li>
-                <li className="flex items-center gap-4 bg-stone-50 p-5 rounded-3xl"><Dog size={20} className="text-[#d4af37]" /> Pet friendly</li>
-                <li className="flex items-center gap-4 bg-stone-50 p-5 rounded-3xl"><Dumbbell size={20} className="text-[#d4af37]" /> {t.fitness}</li>
+                <li className="flex items-center gap-4 bg-stone-50 p-5 rounded-3xl"><Dog size={20} className="text-[#d4af37]" /> {t.petFriendly}</li>
                 <li className="flex items-center gap-4 bg-stone-50 p-5 rounded-3xl"><Plane size={20} className="text-[#d4af37]" /> {t.airportShuttle}</li>
               </ul>
             </div>
@@ -385,17 +374,17 @@ export default function App() {
                 <LayoutGrid size={20} /> {t.facilityCategories.outdoors}
               </h4>
               <ul className="space-y-4 text-stone-600 font-medium text-sm">
-                <li className="flex items-center gap-4"><CheckCircle size={16} className="text-[#d4af37]" /> Outdoor furniture</li>
-                <li className="flex items-center gap-4"><CheckCircle size={16} className="text-[#d4af37]" /> Terrace & Garden</li>
+                <li className="flex items-center gap-4"><CheckCircle size={16} className="text-[#d4af37]" /> {t.outdoorFurniture}</li>
+                <li className="flex items-center gap-4"><CheckCircle size={16} className="text-[#d4af37]" /> {t.terraceGarden}</li>
               </ul>
               
               <h4 className="text-[#d4af37] text-[10px] md:text-[11px] font-black uppercase tracking-[0.4em] flex items-center gap-4 pt-6">
                 <Coffee size={20} /> {t.facilityCategories.food}
               </h4>
               <ul className="space-y-4 text-stone-600 font-medium text-sm">
-                <li className="flex items-center gap-4"><CheckCircle size={16} className="text-[#d4af37]" /> Coffee house on site</li>
-                <li className="flex items-center gap-4"><CheckCircle size={16} className="text-[#d4af37]" /> Wine/Champagne (Extra)</li>
-                <li className="flex items-center gap-4"><CheckCircle size={16} className="text-[#d4af37]" /> Buffet per fëmijë</li>
+                <li className="flex items-center gap-4"><CheckCircle size={16} className="text-[#d4af37]" /> {t.coffeeHouse}</li>
+                <li className="flex items-center gap-4"><CheckCircle size={16} className="text-[#d4af37]" /> {t.wineChampagne}</li>
+                <li className="flex items-center gap-4"><CheckCircle size={16} className="text-[#d4af37]" /> {t.childrenBuffet}</li>
               </ul>
             </div>
 
@@ -404,17 +393,17 @@ export default function App() {
                 <ShieldCheck size={20} /> {t.facilityCategories.safety}
               </h4>
               <ul className="space-y-4 text-stone-600 font-medium text-sm">
-                <li className="flex items-center gap-4"><CheckCircle size={16} className="text-[#d4af37]" /> 24-hour security</li>
-                <li className="flex items-center gap-4"><CheckCircle size={16} className="text-[#d4af37]" /> CCTV common areas</li>
-                <li className="flex items-center gap-4"><CheckCircle size={16} className="text-[#d4af37]" /> Fire extinguishers</li>
+                <li className="flex items-center gap-4"><CheckCircle size={16} className="text-[#d4af37]" /> {t.security24h}</li>
+                <li className="flex items-center gap-4"><CheckCircle size={16} className="text-[#d4af37]" /> {t.cctv}</li>
+                <li className="flex items-center gap-4"><CheckCircle size={16} className="text-[#d4af37]" /> {t.fireExtinguishers}</li>
               </ul>
 
               <h4 className="text-[#d4af37] text-[10px] md:text-[11px] font-black uppercase tracking-[0.4em] flex items-center gap-4 pt-6">
                 <DoorOpen size={20} /> {t.facilityCategories.reception}
               </h4>
               <ul className="space-y-4 text-stone-600 font-medium text-sm">
-                <li className="flex items-center gap-4"><CheckCircle size={16} className="text-[#d4af37]" /> 24-hour front desk</li>
-                <li className="flex items-center gap-4"><CheckCircle size={16} className="text-[#d4af37]" /> Private check-in/out</li>
+                <li className="flex items-center gap-4"><CheckCircle size={16} className="text-[#d4af37]" /> {t.frontDesk24h}</li>
+                <li className="flex items-center gap-4"><CheckCircle size={16} className="text-[#d4af37]" /> {t.privateCheckInOut}</li>
               </ul>
             </div>
 
@@ -423,16 +412,16 @@ export default function App() {
                 <Shirt size={20} /> {t.facilityCategories.cleaning}
               </h4>
               <ul className="space-y-4 text-stone-600 font-medium text-sm">
-                <li className="flex items-center gap-4"><CheckCircle size={16} className="text-[#d4af37]" /> Daily housekeeping</li>
-                <li className="flex items-center gap-4"><CheckCircle size={16} className="text-[#d4af37]" /> Laundry (Extra)</li>
+                <li className="flex items-center gap-4"><CheckCircle size={16} className="text-[#d4af37]" /> {t.housekeeping}</li>
+                <li className="flex items-center gap-4"><CheckCircle size={16} className="text-[#d4af37]" /> {t.laundry}</li>
               </ul>
 
               <h4 className="text-[#d4af37] text-[10px] md:text-[11px] font-black uppercase tracking-[0.4em] flex items-center gap-4 pt-6">
                 <Accessibility size={20} /> {t.facilityCategories.accessibility}
               </h4>
               <ul className="space-y-4 text-stone-600 font-medium text-sm">
-                <li className="flex items-center gap-4"><CheckCircle size={16} className="text-[#d4af37]" /> Wheelchair accessible</li>
-                <li className="flex items-center gap-4"><CheckCircle size={16} className="text-[#d4af37]" /> Raised toilet</li>
+                <li className="flex items-center gap-4"><CheckCircle size={16} className="text-[#d4af37]" /> {t.wheelchair}</li>
+                <li className="flex items-center gap-4"><CheckCircle size={16} className="text-[#d4af37]" /> {t.raisedToilet}</li>
               </ul>
             </div>
           </div>
@@ -482,8 +471,8 @@ export default function App() {
       <footer className="bg-stone-950 text-white py-32 md:py-40 px-6 md:px-8">
         <div className="max-w-[1500px] mx-auto flex flex-col items-center text-center">
           <img src={LOGO_URL} alt="Logo" className="h-32 md:h-40 mb-16 md:mb-20 drop-shadow-2xl" />
-          <h3 className="text-4xl md:text-[9rem] font-serif italic mb-10 md:mb-12 leading-none">{t.dreamStay}</h3>
-          <p className="max-w-4xl text-stone-400 text-lg md:text-4xl font-light mb-20 md:mb-24 italic opacity-80 leading-relaxed px-4">
+          <h3 className="text-4xl md:text-7xl font-serif italic mb-10 md:mb-12 leading-none">{t.dreamStay}</h3>
+          <p className="max-w-4xl text-stone-400 text-lg md:text-2xl font-light mb-20 md:mb-24 italic opacity-80 leading-relaxed px-4">
             "{t.legacyOfExcellence}"
           </p>
           <div className="flex flex-wrap justify-center gap-8 md:gap-16 text-[10px] md:text-[11px] font-black uppercase tracking-[0.3em] text-stone-500 mb-24 md:mb-32">
@@ -525,7 +514,7 @@ const GallerySection = ({ lang }: { lang: Language }) => {
   return (
     <div className="max-w-[1800px] mx-auto px-6 md:px-8">
       <div className="text-center mb-16 md:mb-24">
-        <h2 className="text-5xl md:text-[12rem] font-serif mb-12 md:mb-16 italic tracking-tighter leading-none">{t.gallery}</h2>
+        <h2 className="text-5xl md:text-[10rem] font-serif mb-12 md:mb-16 italic tracking-tighter leading-none">{t.gallery}</h2>
         <div className="flex flex-wrap justify-center gap-4 md:gap-6">
           {categories.map(cat => (
             <button
