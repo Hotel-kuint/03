@@ -5,10 +5,10 @@ export const LOGO_URL = "https://i.ibb.co/chr9W07p/56271621-2032616003698926-752
 
 export const GALLERY_DATA: GalleryImage[] = [
   // Rooms (32)
-  { id: 'r1', category: 'rooms', url: 'https://i.ibb.co/GQjB3YQz/56271621-2032616003698926-7527613592846204928-n-Photoroom.png' },
+  { id: 'r1', category: 'rooms', url: 'https://i.ibb.co/CsQGZmTB/256668386.jpg' },
   { id: 'r2', category: 'rooms', url: 'https://i.ibb.co/8gq9XTjH/256668391-1.jpg' },
-  { id: 'r3', category: 'rooms', url: 'https://i.ibb.co/CsbMzZK3/256668391.jpg' },
-  { id: 'r4', category: 'rooms', url: 'https://i.ibb.co/77YwSTG/256668397.jpg' },
+  { id: 'r3', category: 'rooms', url: 'https://i.ibb.co/CsQGZmTB/256668386.jpg' },
+  { id: 'r4', category: 'rooms', url: 'https://i.ibb.co/CsQGZmTB/256668386.jpg' },
   { id: 'r5', category: 'rooms', url: 'https://i.ibb.co/2YjCw8qH/256668402.jpg' },
   { id: 'r6', category: 'rooms', url: 'https://i.ibb.co/FLbRvfcy/256668418-1.jpg' },
   { id: 'r7', category: 'rooms', url: 'https://i.ibb.co/PsMKzR9H/256668418.jpg' },
